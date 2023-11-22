@@ -5,7 +5,7 @@
 @section('content')
 <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
 <h5>Original Prescription and Remaining Medications</h5>
-<table class=" table table-hover table-sm text-center w-75">
+<table class=" table table-hover table-sm text-center">
     <thead class="table-secondary">
         <tr>
             <th></th>
@@ -15,7 +15,7 @@
             <th>DINNER</th>
             <th>BEDTIME</th>
             <th>DURATION</th>
-            <th>REMAINING</th>
+            <th>REMAININGS</th>
         </tr>
     </thead>
     <tbody>
@@ -23,13 +23,12 @@
             <tr>
                 <td>{{ $prescription->id }}</td>
                 <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
-                <td>{{ $prescription->breakfast }}</td>
-                <td>{{ $prescription->lunch }}</td>
-                <td>{{ $prescription->dinner }}</td>
-                <td>{{ $prescription->bedtime }}</td>
+                <td>{{ floatval($prescription->breakfast) }}</td>
+                <td>{{ floatval($prescription->lunch) }}</td>
+                <td>{{ floatval($prescription->dinner) }}</td>
+                <td>{{ floatval($prescription->bedtime) }}</td>
                 <td>{{ $prescription->duration }}</td>
                 <td>{{ $prescription->remaining_quantity }}</td>
-                {{-- <td>{{ $revised_medications[$prescription->id] }}</td> --}}
             </tr>
         @empty
             <tr>
@@ -54,7 +53,7 @@
                 <th>BEDTIME</th>
                 <th>DURATION</th>
                 <th>TOTAL REQUIRED DOSE</th>
-                <th>REMAINING</th>
+                <th>REMAININGS</th>
             </tr>
         </thead>
         <tbody>
@@ -62,10 +61,10 @@
                 <tr>
                     <td>{{ $prescription->id }}</td>
                     <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
-                    <td>{{ $prescription->breakfast }}</td>
-                    <td>{{ $prescription->lunch }}</td>
-                    <td>{{ $prescription->dinner }}</td>
-                    <td>{{ $prescription->bedtime }}</td>
+                    <td>{{ floatval($prescription->breakfast) }}</td>
+                    <td>{{ floatval($prescription->lunch) }}</td>
+                    <td>{{ floatval($prescription->dinner) }}</td>
+                    <td>{{ floatval($prescription->bedtime) }}</td>
                     <td class="fw-bold">{{ $min_duration }}</td>
                     <td class="fw-bold">{{ $revised_medications[$prescription->id]['total_required_dose'] }}</td>
                     <td class="fw-bold text-danger">
@@ -92,13 +91,5 @@
     </table>
     <button type="submit" class="btn btn-danger">Save Remaining Medications</button>
 </form>
-
-
-{{-- @if(session('total_dose'))
-    <p>Total Breakfast: {{ session('total_dose')['breakfast'] }}</p>
-    <p>Total Lunch: {{ session('total_dose')['lunch'] }}</p>
-    <p>Total Dinner: {{ session('total_dose')['dinner'] }}</p>
-    <p>Total Bedtime: {{ session('total_dose')['bedtime'] }}</p>
-@endif --}}
 
 @endsection

@@ -28,9 +28,14 @@ Route::group(["middleware" => "auth"], function(){
 
     Route::get('/medication', [MedicationController::class, 'index'])->name('medication.index');
     Route::post('/medication/store', [MedicationController::class, 'store'])->name('medication.store');
+    Route::patch('/medication/{id}/update', [MedicationController::class, 'update'])->name('medication.update');
+    Route::delete('/medication/{id}/destroy', [MedicationController::class, 'destroy'])->name('medication.destroy');
 
     Route::get('/prescription/{id}/create', [PrescriptionController::class, 'create'])->name('prescription.create');
     Route::post('/prescription/{id}', [PrescriptionController::class, 'store'])->name('prescription.store');
+    Route::patch('/prescription/{id}/update', [PrescriptionController::class, 'updatePrescription'])->name('prescription.update');
+    Route::delete('/prescription/{id}/destroy', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
+
     Route::get('/prescription/{id}/remaining', [PrescriptionController::class, 'editDurationAndRemainingQuantity'])->name('duration.remain.enter');
     Route::patch('/prescritpion/{id}/update/calculate', [PrescriptionController::class, 'updateAndCalculatePrescriptions'])->name('prescription.update.calculate');
     Route::get('/prescritpion/{id}/prescription/show', [PrescriptionController::class, 'showCalculatedResult'])->name('result.show');

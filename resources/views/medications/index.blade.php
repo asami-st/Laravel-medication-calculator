@@ -26,7 +26,7 @@
             @forelse ($all_medications as $medication)
                 <tr>
                     <td>{{ $medication->id }}</td>
-                    <td>{{ $medication->name }} {{ $medication->form }} {{ $medication->strength }}</td>
+                    <td>{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</td>
                     <td>{{ $medication->updated_at }}</td>
                     <td>
                         <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edit-medication-{{ $medication->id }}"><i class="fa-solid fa-pen-to-square"></i></button>

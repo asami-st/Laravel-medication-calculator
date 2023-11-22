@@ -16,13 +16,10 @@
                             <option value="" hidden>Form</option>
                             <option value="tablets">Tablets</option>
                             <option value="pill">Pills</option>
-                            <option value="3">Three</option>
+                            <option value="capsule">Capsule</option>
                           </select>
                         <input type="text" name="medication_strength" class="form-control" placeholder="60mg">
                     </div>
-
-                    {{-- <input type="text" name="medication_form" class="form-control" placeholder="tablets"> --}}
-
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-sm btn-outline-info" data-bs-dismiss="modal">Cancel</button>

@@ -61,6 +61,30 @@ class PrescriptionController extends Controller
         return redirect()->back();
     }
 
+    public function updatePrescription(Request $request, $id)
+    {
+        $prescription = $this->patient->findOrFail($id);
+
+        $prescription->medication_id = $request->medication;
+        $prescription->breakfast = $request->breakfast;
+        $prescription->lunch = $request->lunch;
+        $prescription->dinner = $request->dinner;
+        $prescription->bedtime = $request->bedtime;
+        $prescription->duration = $request->duration;
+        $prescription->remaining_quantity = $request->remaining_quantity;
+        $prescription->save();
+
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        $this->prescription->destroy($id);
+
+        return redirect()->back();
+    }
+
+
     public function editDurationAndRemainingQuantity($id)
     {
         $patient = $this->patient->findOrFail($id);
@@ -200,41 +224,6 @@ class PrescriptionController extends Controller
         return $revised_medications;
     }
 
-
-
-
-    // public function calculatePrescriptions($id)
-    // {
-    //     $patient = Patient::with('prescriptions')->findOrFail($id);
-    //     $calculations = [];
-
-    //     foreach ($patient->prescriptions as $prescription) {
-    //         $calculation_results = $this->calculateRevisedDuration($prescription);
-    //         $calculations[$prescription->id] = $calculation_results;
-    //     }
-
-    //     return $calculations;
-    // }
-
-    // public function calculateRevisedDuration($prescription)
-    // {
-    //     $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
-    //     $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
-    //     if ($prescription->remaining_quantity >= $total_daily_dose) {
-    //         $revised_duration = 0;
-    //         $revised_remaining_medications = $prescription->remaining_quantity - $total_daily_dose;
-    //     }else {
-    //         $revised_total_dose = $total_daily_dose - $prescription->remaining_quantity;          //調整後の総量(処方総量-残薬)
-    //         $revised_duration = (int)($revised_total_dose / $daily_dosing_frequency);
-    //         $revised_remaining_medications = $revised_total_dose % $daily_dosing_frequency;       //調整後の残薬
-    //     }
-
-    //     return [
-    //         'revised_duration' => $revised_duration,
-    //         'revised_remaining_medications' => $revised_remaining_medications
-    //     ];
-    // }
-
     public function getDailyDosingFrequency($prescription)
     {
         $daily_dosing_frequency = 0;
@@ -250,18 +239,6 @@ class PrescriptionController extends Controller
         if ($prescription->bedtime > 0) {
             $daily_dosing_frequency ++;
         }
-        // $daily_dosing_frequency_count = Prescription::selectRaw('SUM(CASE WHEN breakfast IS NOT NULL THEN 1 ELSE 0 END) as breakfast_count')
-        //     ->selectRaw('SUM(CASE WHEN lunch IS NOT NULL THEN 1 ELSE 0 END) as lunch_count')
-        //     ->selectRaw('SUM(CASE WHEN dinner IS NOT NULL THEN 1 ELSE 0 END) as dinner_count')
-        //     ->selectRaw('SUM(CASE WHEN bedtime IS NOT NULL THEN 1 ELSE 0 END) as bedtime_count')
-        //     ->first();
-
-        // $breakfast_count = $daily_dosing_frequency_count->breakfast_count;
-        // $lunch_count = $daily_dosing_frequency_count->lunch_count;
-        // $dinner_count = $daily_dosing_frequency_count->dinner_count;
-        // $bedtime_count = $daily_dosing_frequency_count->bedtime_count;
-
-        // $daily_dosing_frequency = $breakfast_count + $lunch_count + $dinner_count + $bedtime_count;
 
         return $daily_dosing_frequency;
     }
@@ -276,35 +253,5 @@ class PrescriptionController extends Controller
                     ->with('patient', $patient);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Prescription $prescription)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Prescription $prescription)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Prescription $prescription)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Prescription $prescription)
-    {
-        //
-    }
 }

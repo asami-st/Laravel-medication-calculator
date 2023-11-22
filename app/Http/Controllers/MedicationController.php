@@ -58,22 +58,31 @@ class MedicationController extends Controller
      */
     public function edit(Medication $medication)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Medication $medication)
+    public function update(Request $request, $id)
     {
-        //
+        $medication = $this->medication->findOrFail($id);
+
+        $medication->name = $request->medication_name;
+        $medication->form = $request->medication_form;
+        $medication->strength = $request->medication_strength;
+        $medication->save();
+
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Medication $medication)
+    public function destroy($id)
     {
-        //
+        $this->medication->destroy($id);
+
+        return redirect()->back();
     }
 }

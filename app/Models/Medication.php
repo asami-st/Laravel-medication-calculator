@@ -13,4 +13,9 @@ class Medication extends Model
     {
         return $this->belongsTo(Medication::class);
     }
+
+    public function getMedicationName()
+    {
+        return "{$this->name}{$this->form}{$this->strength}";
+    }
 }

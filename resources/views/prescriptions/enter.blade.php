@@ -18,7 +18,7 @@
                     <th>DINNER</th>
                     <th>BEDTIME</th>
                     <th>DURATION</th>
-                    <th>REMAINING</th>
+                    <th>REMAININGS</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,10 +26,10 @@
                     <tr>
                         <td>{{ $prescription->id }}</td>
                         <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
-                        <td>{{ $prescription->breakfast }}</td>
-                        <td>{{ $prescription->lunch }}</td>
-                        <td>{{ $prescription->dinner }}</td>
-                        <td>{{ $prescription->bedtime }}</td>
+                        <td>{{ floatval($prescription->breakfast) }}</td>
+                        <td>{{ floatval($prescription->lunch) }}</td>
+                        <td>{{ floatval($prescription->dinner) }}</td>
+                        <td>{{ floatval($prescription->bedtime) }}</td>
                         <td>
                             <div class="input-group">
                                 <input type="number" name="duration[{{ $prescription->id }}]" value="{{ $prescription->duration ?? '0' }}" id="duration-{{ $prescription->id }}" class="form-control mx-auto" style="width: 10px">
