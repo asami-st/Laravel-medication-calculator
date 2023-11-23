@@ -23,7 +23,7 @@ $(function() {
         const searchValue = $(this).val();
         selectedMedication = -1; // reset
 
-        if (searchValue.length >= 2) {
+        if (searchValue.length >= 3) {
             $.getJSON('/prescription/search-medications', { search: searchValue }, function(medications) {
                 $('#search-results').empty().show();
 

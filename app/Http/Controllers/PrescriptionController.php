@@ -220,35 +220,51 @@ class PrescriptionController extends Controller
         // $patient = $this->patient->findOrFail($patient_id);
         // $adjustments = $this->adjustmentOfRemainingMedication($request, $patient_id);
         $patient = Patient::with('prescriptions')->findOrFail($patient_id);
+        $needed_duration = $request->needed_duration;
         $adjustments = [];
 
         foreach ($patient->prescriptions as $prescription) {
             $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
-            $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
-            $total_quantity = $total_daily_dose + $prescription->remaining_quantity;
-            $max_duration = (int)($total_quantity / $daily_dosing_frequency);
-            $adjust_duration = $max_duration;
-
-            if ($max_duration > $request->needed_duration * 2 ) {
-                $adjust_duration = 0;
-            }else {
-                if ($max_duration >= $request->needed_duration) {
-                    $adjust_duration = $request->needed_duration - ($max_duration - $request->needed_duration);
-                }else {
-                    return redirect()->back()->withErrors(['error' => '無効な処方日数です']);
-                }
+            $remaining_duration = (int)($prescription->remaining_quantity /  $daily_dosing_frequency);
+            if ($remaining_duration >= $prescription->duration) {
+                $adjusted_duration = 0;
+                $adjusted_remaining_quantity = $prescription->remaining_quantity - $prescription->duration * $daily_dosing_frequency;
+            }elseif($remaining_duration >= 1) {
+                $adjusted_duration = $prescription->duration - $remaining_duration;
+                $adjusted_remaining_quantity = $prescription->remaining_quantity - ($prescription->duration - $adjusted_duration) * $daily_dosing_frequency;
+            }else{
+                return redirect()->back()->withErrors(['error' => 'エラーが発生しました']);
             }
+
+            // $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
+            // $total_quantity = $total_daily_dose + $prescription->remaining_quantity;
+            // $max_duration = (int)($total_quantity / $daily_dosing_frequency);
+            // $adjust_duration = $max_duration;
+
+            // if ($max_duration > $needed_duration * 2 ) {
+            //     $adjust_duration = 0;
+            //     $adjust_remaining_quantity = $total_quantity - $needed_duration * $daily_dosing_frequency;
+            // }else {
+            //     if ($max_duration >= $needed_duration) {
+            //         $adjust_duration = $needed_duration - ($max_duration - $needed_duration);
+            //         $adjust_remaining_quantity = $total_quantity - $adjust_duration * $daily_dosing_frequency;
+            //     }else {
+            //         return redirect()->back()->withErrors(['error' => '無効な処方日数です']);
+            //     }
+            // }
 
             $adjustments[$prescription->id] = [
                 'prescription_id' => $prescription->id,
-                'adjust_duration' => $adjust_duration
+                'adjusted_duration' => $adjusted_duration,
+                'adjusted_remaining_quantity' => $adjusted_remaining_quantity
             ];
         }
 
 
         return view('prescriptions.adjust-result')
                 ->with('adjustments', $adjustments)
-                ->with('patient', $patient);
+                ->with('patient', $patient)
+                ->with('needed_duration', $needed_duration);
     }
     // update remaining_quantity( prescriptions table ) after revising
     public function updateRevisedRemaining($request, $patient_id)

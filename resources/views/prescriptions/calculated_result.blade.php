@@ -5,7 +5,7 @@
 @section('content')
 <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
 <h5>元の処方箋と残薬数</h5>
-<table class=" table table-hover table-sm text-center">
+<table class=" table table-hover table-sm text-center w-75">
     <thead class="table-secondary">
         <tr>
             <th></th>
