@@ -217,13 +217,15 @@ class PrescriptionController extends Controller
     // 残薬調整後の結果
     public function showAdjustments(Request $request, $patient_id)
     {
-        // $patient = $this->patient->findOrFail($patient_id);
-        // $adjustments = $this->adjustmentOfRemainingMedication($request, $patient_id);
-        $patient = Patient::with('prescriptions')->findOrFail($patient_id);
-        $needed_duration = $request->needed_duration;
+        $patient = $this->patient->findOrFail($patient_id);
+        $selected_prescription_ids = $request->input('selected_prescriptions', []);
+
+        $prescriptions = Prescription::where('patient_id', $patient_id)
+                                     ->whereIn('id', $selected_prescription_ids)
+                                     ->get();
         $adjustments = [];
 
-        foreach ($patient->prescriptions as $prescription) {
+        foreach ($prescriptions as $prescription) {
             $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
             $remaining_duration = (int)($prescription->remaining_quantity /  $daily_dosing_frequency);
             if ($remaining_duration >= $prescription->duration) {
@@ -233,7 +235,7 @@ class PrescriptionController extends Controller
                 $adjusted_duration = $prescription->duration - $remaining_duration;
                 $adjusted_remaining_quantity = $prescription->remaining_quantity - ($prescription->duration - $adjusted_duration) * $daily_dosing_frequency;
             }else{
-                return redirect()->back()->withErrors(['error' => 'エラーが発生しました']);
+                return redirect()->back()->withErrors(['error' => '調整できない薬があります']);
             }
 
             // $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
@@ -263,9 +265,30 @@ class PrescriptionController extends Controller
 
         return view('prescriptions.adjust-result')
                 ->with('adjustments', $adjustments)
-                ->with('patient', $patient)
-                ->with('needed_duration', $needed_duration);
+                ->with('patient', $patient);
     }
+
+    public function updateSelectedRemainingMedication(Request $request, $patient_id)
+    {
+        $patient = $this->patient->findOrFail($patient_id);
+        $remaining_quantities = $request->input('remaining_quantities', []);
+
+        foreach ($remaining_quantities as $prescription_id => $quantity) {
+            if ($quantity !== null) {
+                $prescription = Prescription::where('patient_id', $patient_id)
+                                            ->where('id', $prescription_id)
+                                            ->first();
+
+                if ($prescription) {
+                    $prescription->remaining_quantity = $quantity;
+                    $prescription->save();
+                }
+            }
+        }
+
+        return redirect()->route('prescription.create', $patient->id);
+    }
+
     // update remaining_quantity( prescriptions table ) after revising
     public function updateRevisedRemaining($request, $patient_id)
     {

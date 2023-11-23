@@ -5,9 +5,9 @@
 @section('content')
     <form action="{{ route('adjust.show', $patient->id) }}" method="post">
         @csrf
-        <h3>残薬調整が必要な薬を選択</h3>
+        <h3>残薬調整を実施する薬を選択</h3>
         <table class=" table table-hover table-sm text-center w-75">
-            <thead class="table-secondary">
+            <thead class="table-success">
                 <tr>
                     <th></th>
                     <th>医薬品名</th>
@@ -24,8 +24,8 @@
                     <tr>
                         <td>
                             <div class="form-check text-start">
-                                <input class="form-check-input" type="checkbox" value="" id="select-prescription-{{ $prescription->id }}">
-                                <label class="form-check-label" for="select-prescription-{{ $prescription->id }}">
+                                <input class="form-check-input" name="selected_prescriptions[]" value="{{ $prescription->id }}" type="checkbox" value="" id="select-{{ $prescription->id }}">
+                                <label class="form-check-label" for="select-{{ $prescription->id }}">
                                     {{ $loop->iteration }}
                                 </label>
                                 </div>
@@ -45,25 +45,13 @@
                 @endforelse
             </tbody>
         </table>
-
-        <div class="row">
-            <div class="col-auto">
-                <input type="number" name="needed_duration" id="needed-duration" class="form-control">
-            </div>
-            <div class="col-auto">
-                <h1>日分</h1>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-success">調整</button>
-            </div>
-        </div>
+        <button type="submit" class="btn btn-success">残薬調整</button>
+        <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-success">戻る</a>
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
+            <div class="alert alert-danger mt-3 w-75">
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <h6>{{ $error }}</h6>
                     @endforeach
-                </ul>
             </div>
         @endif
     </form>

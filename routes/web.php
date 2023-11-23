@@ -43,6 +43,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::patch('prescription/{id}/revised_remaining/update', [PrescriptionController::class, 'updateRevisedRemaining'])->name('revised.remain.update');
     Route::get('prescription/{id}/adjust', [PrescriptionController::class, 'adjust'])->name('adjust');
     Route::post('prescription/{id}/adjust/show', [PrescriptionController::class, 'showAdjustments'])->name('adjust.show');
+    Route::patch('prescription/{id}/adjust/update', [PrescriptionController::class, 'updateSelectedRemainingMedication'])->name('adjust.update');
 });
 
 

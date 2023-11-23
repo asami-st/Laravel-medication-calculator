@@ -2,10 +2,9 @@
 <div class="container">
     <div class="row">
 
-<form action="{{ route('revised.remain.update', $patient->id) }}" method="post">
+<form action="{{ route('adjust.update', $patient->id) }}" method="post">
     @csrf
     @method('PATCH')
-    <h3 class="mt-5">処方日数: <span class="text-danger">{{ $needed_duration }}</span> 日分</h3>
     <table class=" table table-hover table-sm text-center w-75">
         <thead class="table-danger">
             <tr>
@@ -24,12 +23,13 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
-                    <td class="fw-bold">{{ $prescription->duration }}</td>
+                    <td>{{ $prescription->duration }}</td>
                     <td><i class="fa-solid fa-right-long"></i></td>
-                    <td class="fw-bold">{{ $adjustments[$prescription->id]['adjusted_duration'] }}</td>
+                    <td class="fw-bold text-danger">{{ $adjustments[$prescription->id]['adjusted_duration'] ?? '-'}}</td>
                     <td>{{ $prescription->remaining_quantity }}</td>
                     <td><i class="fa-solid fa-right-long"></i></td>
-                    <td>{{ $adjustments[$prescription->id]['adjusted_remaining_quantity'] }}</td>
+                    <td class="fw-bold">{{ $adjustments[$prescription->id]['adjusted_remaining_quantity']  ?? '-'}}</td>
+                    <input type="hidden" name="remaining_quantities[{{ $prescription->id }}]" value="{{ $adjustments[$prescription->id]['adjusted_remaining_quantity']  ?? '' }}">
                 </tr>
             @empty
                 <tr>
