@@ -15,9 +15,9 @@
                         <input type="text" name="medication_name" class="form-control" value="{{ $medication->name }}">
                         <select class="form-select" name="medication_form">
                             <option value="" hidden>Form</option>
-                            <option value="tablets"{{ $medication->form == 'tablets' ? 'selected' : '' }}>Tablets</option>
-                            <option value="pill"{{ $medication->form == 'pill' ? 'selected' : '' }}>Pills</option>
-                            <option value="capsule" {{ $medication->form == 'capsule' ? 'selected' : '' }}>Capsule</option>
+                            <option value="錠"{{ $medication->form == '錠' ? 'selected' : '' }}>錠</option>
+                            <option value="OD錠"{{ $medication->form == 'OD錠' ? 'selected' : '' }}>OD錠</option>
+                            <option value="カプセル" {{ $medication->form == 'カプセル' ? 'selected' : '' }}>カプセル</option>
                           </select>
                         <input type="text" name="medication_strength" class="form-control" value="{{ $medication->strength }}">
                     </div>
@@ -45,7 +45,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <h6>Are you sure you want to delete <span class="fw-bold">{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</span> ?</h6>
+                    <h6><span class="fw-bold">{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</span> を削除しますか？</h6>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancel</button>

@@ -6,10 +6,10 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-auto">
-            <h1>All Patients</h1>
+            <h1>患者一覧</h1>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient"><i class="fa-solid fa-user-plus"></i> Add Patient</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient"><i class="fa-solid fa-user-plus"></i> Add</button>
         </div>
     </div>
     {{-- Modal --}}
@@ -19,8 +19,8 @@
         <thead class="table-primary">
             <tr>
                 <th></th>
-                <th>NAME</th>
-                <th>UPDATED AT</th>
+                <th>患者名</th>
+                <th>更新日</th>
             </tr>
         </thead>
         <tbody>

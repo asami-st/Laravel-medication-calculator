@@ -85,4 +85,26 @@ class MedicationController extends Controller
 
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        // $medications = $this->medication->where('name', 'like', '%' . $request->medication . '%')->get();
+        // if ($request->ajax()) {
+        //     return response()->json($medications);
+        // }
+        $query = $request->input('search');
+        $medications = $this->medication->where('name', 'like', '%' . $query . '%')
+                                        ->orWhere('form', 'like', '%' . $query . '%')
+                                        ->orWhere('strength', 'like', '%' . $query . '%')
+                                        ->get();
+
+        $suggestions = $medications->map(function ($medication) {
+            return [
+                'label' => $medication->name . ' ' . $medication->form . ' ' . $medication->strength,
+                'value' => $medication->id
+            ];
+        });
+
+        return response()->json($suggestions);
+    }
 }

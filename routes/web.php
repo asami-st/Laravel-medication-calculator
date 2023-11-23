@@ -30,6 +30,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::post('/medication/store', [MedicationController::class, 'store'])->name('medication.store');
     Route::patch('/medication/{id}/update', [MedicationController::class, 'update'])->name('medication.update');
     Route::delete('/medication/{id}/destroy', [MedicationController::class, 'destroy'])->name('medication.destroy');
+    Route::get('/prescritption/search-medications', [MedicationController::class, 'search'])->name('medication.search');
 
     Route::get('/prescription/{id}/create', [PrescriptionController::class, 'create'])->name('prescription.create');
     Route::post('/prescription/{id}', [PrescriptionController::class, 'store'])->name('prescription.store');
@@ -37,9 +38,11 @@ Route::group(["middleware" => "auth"], function(){
     Route::delete('/prescription/{id}/destroy', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
 
     Route::get('/prescription/{id}/remaining', [PrescriptionController::class, 'editDurationAndRemainingQuantity'])->name('duration.remain.enter');
-    Route::patch('/prescritpion/{id}/update/calculate', [PrescriptionController::class, 'updateAndCalculatePrescriptions'])->name('prescription.update.calculate');
-    Route::get('/prescritpion/{id}/prescription/show', [PrescriptionController::class, 'showCalculatedResult'])->name('result.show');
+    Route::patch('/prescritpion/{id}/update/calculate', [PrescriptionController::class, 'updateDurationAndRemainingQuantites'])->name('duration.remain.update');
+    Route::get('/prescritpion/{id}/pack', [PrescriptionController::class, 'implementUnitDosePackaging'])->name('pack.show');
     Route::patch('prescription/{id}/revised_remaining/update', [PrescriptionController::class, 'updateRevisedRemaining'])->name('revised.remain.update');
+    Route::get('prescription/{id}/adjust', [PrescriptionController::class, 'adjust'])->name('adjust');
+    Route::post('prescription/{id}/adjust/show', [PrescriptionController::class, 'showAdjustments'])->name('adjust.show');
 });
 
 

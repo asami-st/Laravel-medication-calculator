@@ -5,11 +5,11 @@
             <div class="modal-content border-primary">
                 <div class="modal-header border-primary">
                     <h4 class="modal-title text-primary">
-                        <i class="fa-solid fa-user-plus"></i> Add Patient
+                        <i class="fa-solid fa-user-plus"></i> Add
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="patient_name" class="form-control" placeholder="Patient name">
+                    <input type="text" name="patient_name" class="form-control" placeholder="患者氏名">
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Cancel</button>

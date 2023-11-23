@@ -3,28 +3,28 @@
 @section('title', 'Remaining Medication')
 
 @section('content')
-    <form action="{{ route('prescription.update.calculate', $patient->id) }}" method="post">
+    <form action="{{ route('duration.remain.update', $patient->id) }}" method="post">
         @csrf
         @method('PATCH')
         <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
-        <h1>Enter the Duration and Remaining Medications</h1>
+        <h1>処方日数と残薬数の確認</h1>
         <table class=" table table-hover table-sm text-center">
             <thead class="table-secondary">
                 <tr>
                     <th></th>
-                    <th>NAME</th>
-                    <th>BREAKFAST</th>
-                    <th>LUNCH</th>
-                    <th>DINNER</th>
-                    <th>BEDTIME</th>
-                    <th>DURATION</th>
-                    <th>REMAININGS</th>
+                    <th>医薬品名</th>
+                    <th>朝</th>
+                    <th>昼</th>
+                    <th>夕</th>
+                    <th>寝る前</th>
+                    <th>処方日数</th>
+                    <th>残薬数</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($patient->prescriptions as $prescription)
                     <tr>
-                        <td>{{ $prescription->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
                         <td>{{ floatval($prescription->breakfast) }}</td>
                         <td>{{ floatval($prescription->lunch) }}</td>
@@ -33,7 +33,7 @@
                         <td>
                             <div class="input-group">
                                 <input type="number" name="duration[{{ $prescription->id }}]" value="{{ $prescription->duration ?? '0' }}" id="duration-{{ $prescription->id }}" class="form-control mx-auto" style="width: 10px">
-                                <span class="input-group-text text-muted">days</span>
+                                <span class="input-group-text text-muted">日</span>
                             </div>
                         </td>
                         <td>

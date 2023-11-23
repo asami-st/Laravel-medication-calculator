@@ -4,18 +4,18 @@
 
 @section('content')
 <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
-<h5>Original Prescription and Remaining Medications</h5>
+<h5>元の処方箋と残薬数</h5>
 <table class=" table table-hover table-sm text-center">
     <thead class="table-secondary">
         <tr>
             <th></th>
-            <th>NAME</th>
-            <th>BREAKFAST</th>
-            <th>LUNCH</th>
-            <th>DINNER</th>
-            <th>BEDTIME</th>
-            <th>DURATION</th>
-            <th>REMAININGS</th>
+            <th>医薬品名</th>
+            <th>朝</th>
+            <th>昼</th>
+            <th>夕</th>
+            <th>寝る前</th>
+            <th>処方日数</th>
+            <th>残薬数</th>
         </tr>
     </thead>
     <tbody>
@@ -41,19 +41,19 @@
 <form action="{{ route('revised.remain.update', $patient->id) }}" method="post">
     @csrf
     @method('PATCH')
-    <h3 class="mt-5">Maximum Duration for Unit-Dose Packaging: <span class="text-danger">{{ $min_duration }}</span> days</h3>
+    <h3 class="mt-5">一包化可能な最大日数: <span class="text-danger">{{ $min_duration }}</span> 日分</h3>
     <table class=" table table-hover table-sm text-center w-75">
         <thead class="table-danger">
             <tr>
                 <th></th>
-                <th>NAME</th>
-                <th>BREAKFAST</th>
-                <th>LUNCH</th>
-                <th>DINNER</th>
-                <th>BEDTIME</th>
-                <th>DURATION</th>
-                <th>TOTAL REQUIRED DOSE</th>
-                <th>REMAININGS</th>
+                <th>医薬品名</th>
+                <th>朝</th>
+                <th>昼</th>
+                <th>夕</th>
+                <th>寝る前</th>
+                <th>処方日数</th>
+                <th>総使用数</th>
+                <th>残薬数</th>
             </tr>
         </thead>
         <tbody>
@@ -79,17 +79,18 @@
             @endforelse
             <tr>
                 <td></td>
-                <td class="fw-bold">SUM:</td>
+                <td class="fw-bold">合計:</td>
                 <td  class="fw-bold">{{ $total_dose['breakfast'] }}</td>
                 <td  class="fw-bold">{{ $total_dose['lunch'] }}</td>
                 <td  class="fw-bold">{{ $total_dose['dinner'] }}</td>
                 <td  class="fw-bold">{{ $total_dose['bedtime'] }}</td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-danger">Save Remaining Medications</button>
+    <button type="submit" class="btn btn-danger">残薬数保存</button>
 </form>
 
 @endsection

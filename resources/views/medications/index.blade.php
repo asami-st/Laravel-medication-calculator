@@ -6,10 +6,10 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-auto">
-            <h1>All Medications</h1>
+            <h1>医薬品一覧</h1>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-medication"><i class="fa-solid fa-prescription-bottle-medical"></i> Add Medication</button>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-medication"><i class="fa-solid fa-prescription-bottle-medical"></i> Add</button>
         </div>
         @include('medications.create')
     </div>
@@ -17,8 +17,8 @@
         <thead class="table-info">
             <tr>
                 <th>{{-- id --}}</th>
-                <th>NAME</th>
-                <th>UPDATED AT</th>
+                <th>医薬品名</th>
+                <th>更新日</th>
                 <th>{{-- buttons --}}</th>
             </tr>
         </thead>

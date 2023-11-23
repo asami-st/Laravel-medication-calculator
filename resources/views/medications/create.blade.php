@@ -6,17 +6,17 @@
             <div class="modal-content border-info">
                 <div class="modal-header border-info">
                     <h4 class="modal-title text-info">
-                        <i class="fa-solid fa-prescription-bottle-medical"></i> Add Medication
+                        <i class="fa-solid fa-prescription-bottle-medical"></i> Add
                     </h4>
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
                         <input type="text" name="medication_name" class="form-control" placeholder="Loxoprofen">
                         <select class="form-select" name="medication_form">
-                            <option value="" hidden>Form</option>
-                            <option value="tablets">Tablets</option>
-                            <option value="pill">Pills</option>
-                            <option value="capsule">Capsule</option>
+                            <option value="" hidden>剤形</option>
+                            <option value="錠">錠</option>
+                            <option value="OD錠">OD錠</option>
+                            <option value="カプセル">カプセル</option>
                           </select>
                         <input type="text" name="medication_strength" class="form-control" placeholder="60mg">
                     </div>
