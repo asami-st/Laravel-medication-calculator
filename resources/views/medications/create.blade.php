@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <input type="text" name="medication_name" class="form-control" placeholder="Loxoprofen">
+                        <input type="text" name="medication_name" class="form-control" placeholder="ロキソニン">
                         <select class="form-select" name="medication_form">
                             <option value="" hidden>剤形</option>
                             <option value="錠">錠</option>

@@ -25,7 +25,7 @@
                     <td>{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</td>
                     <td>{{ $prescription->duration }}</td>
                     <td><i class="fa-solid fa-right-long"></i></td>
-                    <td class="fw-bold text-danger">{{ $adjustments[$prescription->id]['adjusted_duration'] ?? '-'}}</td>
+                    <td class="fw-bold text-dangera">{{ $adjustments[$prescription->id]['adjusted_duration'] ?? '-'}}</td>
                     <td>{{ $prescription->remaining_quantity }}</td>
                     <td><i class="fa-solid fa-right-long"></i></td>
                     <td class="fw-bold">{{ $adjustments[$prescription->id]['adjusted_remaining_quantity']  ?? '-'}}</td>

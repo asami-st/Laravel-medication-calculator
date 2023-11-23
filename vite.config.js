@@ -7,6 +7,7 @@ export default defineConfig({
             'resources/css/app.css',
             'resources/js/app.js',
             'resources/js/search.js',
+            'resources/js/check.js',
             'resources/sass/app.scss',
         ]),
     ],
