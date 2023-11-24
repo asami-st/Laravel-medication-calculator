@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Index')
+@section('title', '患者一覧')
 
 @section('content')
     <div class="row mb-3">
@@ -9,7 +9,7 @@
             <h1>患者一覧</h1>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient"><i class="fa-solid fa-user-plus"></i> Add</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient"><i class="fa-solid fa-user-plus"></i> 追加</button>
         </div>
     </div>
     {{-- Modal --}}

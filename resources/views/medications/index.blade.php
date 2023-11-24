@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Index')
+@section('title', '医薬品一覧')
 
 @section('content')
     <div class="row mb-3">
@@ -9,7 +9,7 @@
             <h1>医薬品一覧</h1>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-medication"><i class="fa-solid fa-prescription-bottle-medical"></i> Add</button>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-medication"><i class="fa-solid fa-pills"></i> 追加</button>
         </div>
         @include('medications.create')
     </div>

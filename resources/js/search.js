@@ -1,21 +1,3 @@
-// $(document).ready(function() {
-//     $('#medication-search').on('keyup', function() {
-//         var value = $(this).val().toLowerCase();
-//         $("#medication-select option").each(function() {
-//             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-//         });
-//     });
-// });
-
-// $(function() {
-//     $('#medication-search').on('keyup', function() {
-//         var value = $(this).val().toLowerCase();
-//         $("#medication-select option").each(function() {
-//             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-//         });
-//     });
-// });
-
 $(function() {
     var selectedMedication = -1;
 

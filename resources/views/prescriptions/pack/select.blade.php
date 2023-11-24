@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', '残薬調整')
+@section('title', '一包化')
 
 @section('content')
-    <form action="{{ route('adjust.show', $patient->id) }}" method="post">
+    <form action="{{ route('pack.show', $patient->id) }}" method="post">
         @csrf
-        <h3>残薬調整を実施する薬を選択</h3>
+        <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
+        <h4>一包化する薬を選択</h4>
         <table class=" table table-hover table-sm text-center w-75">
-            <thead class="table-success">
+            <thead class="table-primary">
                 <tr>
                     <th>
                         <div class="form-check text-start">
@@ -52,8 +53,8 @@
                 @endforelse
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success">残薬調整</button>
-        <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-success">戻る</a>
+        <button type="submit" class="btn btn-primary">一包化</button>
+        <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-primary">戻る</a>
         @if ($errors->any())
             <div class="alert alert-danger mt-3 w-75">
                     @foreach ($errors->all() as $error)

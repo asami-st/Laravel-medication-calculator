@@ -7,7 +7,7 @@
             <div class="modal-content border-warning">
                 <div class="modal-header border-warning">
                     <h4 class="modal-title text-warning">
-                        <i class="fa-solid fa-prescription-bottle-medical"></i> Edit Medication
+                        <i class="fa-solid fa-prescription-bottle-medical"></i> 医薬品名修正
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -41,11 +41,12 @@
             <div class="modal-content border-danger">
                 <div class="modal-header border-danger">
                     <h4 class="modal-title text-danger">
-                        <i class="fa-solid fa-circle-exclamation"></i> Delete Medication
+                        <i class="fa-solid fa-circle-exclamation"></i> 医薬品削除
                     </h4>
                 </div>
                 <div class="modal-body">
                     <h6><span class="fw-bold">{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</span> を削除しますか？</h6>
+                    <p class="fw-light">処方薬として既に登録されている場合でも削除されます。</p>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancel</button>

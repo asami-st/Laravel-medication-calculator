@@ -6,10 +6,10 @@
     <form action="{{ route('duration.remain.update', $patient->id) }}" method="post">
         @csrf
         @method('PATCH')
-        <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
-        <h1>処方日数と残薬数の確認</h1>
+        <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
+        <h4>処方日数と残薬数の一括変更</h4>
         <table class=" table table-hover table-sm text-center">
-            <thead class="table-secondary">
+            <thead class="table-warning">
                 <tr>
                     <th></th>
                     <th>医薬品名</th>
@@ -47,7 +47,8 @@
                 @endforelse
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary">Calculate</button>
+        <button type="submit" class="btn btn-warning px-5">変更</button>
+        <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-warning px-5">戻る</a>
     </form>
 @endsection
 

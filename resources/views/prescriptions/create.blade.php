@@ -6,33 +6,25 @@
     @if (!$all_medications->isEmpty())
         <form action="{{ route('prescription.store', $patient->id) }}" method="post">
             @csrf
-            <h3>ID:{{ $patient->id }} {{ $patient->name }}</h3>
+            <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="medication-select" class="form-label">医薬品名</label>
-                    <input class="form-control mb-3" id="medication-search" type="text" placeholder="Search medications">
+                    <input class="form-control mb-3" id="medication-search" type="text" placeholder="医薬品名検索">
                     <input type="hidden" id="medication-id" name="medication_id">
-
-                    {{-- <div id="search-results" class="list-group position-absolute" style="display:none; z-index: 1000;"></div>
-                    <select name="medication" id="medication-select" class="form-select medication-select">
-                            <option value=""hidden>Select Medication</option>
-                        @foreach ($all_medications as $medication)
-                            <option value="{{ $medication->id }}">{{ $medication->name}} {{$medication->form}} {{$medication->strength}} </option>
-                        @endforeach
-                    </select> --}}
                 </div>
                 <div class="col-5">
                     <div class="row">
                         <div class="col">
                             <label for="duration" class="form-label">処方日数</label>
                             <div class="input-group">
-                                <input type="number" name="duration" id="duration" class="form-control" min="0" placeholder="duration">
+                                <input type="number" name="duration" id="duration" class="form-control" min="0" placeholder="処方日数入力">
                                 <span class="input-group-text">日</span>
                             </div>
                         </div>
                         <div class="col">
                             <label for="remaining-quantity" class="form-label">残薬数</label>
-                            <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="remaining quantity">
+                            <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="残薬数入力">
                         </div>
                     </div>
                 </div>
@@ -48,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-5">
-                    <button type="submit" class="btn btn-secondary w-100">Add</button>
+                    <button type="submit" class="btn btn-secondary w-100">追加</button>
                 </div>
             </div>
         </form>
@@ -92,8 +84,8 @@
             </tbody>
         </table>
         <a href="{{ route('duration.remain.enter', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
-        <a href="{{ route('adjust', $patient->id) }}" class="btn btn-danger">残薬調整</a>
-        <a href="{{ route('pack.show', $patient->id) }}" class="btn btn-primary">一包化</a>
+        <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
+        <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
 
     @else
         <div class="text-center">

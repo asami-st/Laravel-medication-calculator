@@ -6,7 +6,7 @@
             <div class="modal-content border-info">
                 <div class="modal-header border-info">
                     <h4 class="modal-title text-info">
-                        <i class="fa-solid fa-prescription-bottle-medical"></i> Add
+                        <i class="fa-solid fa-pills"></i> 医薬品名追加
                     </h4>
                 </div>
                 <div class="modal-body">

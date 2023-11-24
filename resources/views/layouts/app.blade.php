@@ -65,10 +65,10 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="{{route('index')}}" class="nav-link">Patients</a>
+                                <a href="{{route('index')}}" class="nav-link"><i class="fa-solid fa-user"></i> 患者</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('medication.index')}}" class="nav-link">Medications</a>
+                                <a href="{{route('medication.index')}}" class="nav-link"><i class="fa-solid fa-pills"></i> 医薬品</a>
                             </li>
 
                             <li class="nav-item dropdown">

@@ -19,17 +19,7 @@ class PrescriptionController extends Controller
         $this->patient = $patient;
         $this->medication = $medication;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create($id)
     {
         $patient = $this->patient->findOrFail($id);
@@ -38,12 +28,8 @@ class PrescriptionController extends Controller
         return view('prescriptions.create')
                 ->with('patient', $patient)
                 ->with('all_medications', $all_medications);
-                // ->with('all_prescriptions', $all_prescriptions);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, $id)
     {
         $request->validate([
@@ -104,26 +90,6 @@ class PrescriptionController extends Controller
                 ->with('patient', $patient);
     }
 
-    //update duration and remaining quanities / calculate $min_duration, $rivised_medications, $total_dose
-    // public function updateAndCalculatePrescriptions(Request $request, $patient_id)
-    // {
-    //     $patient = $this->patient->findOrFail($patient_id);
-
-    //     $this->updateDuratioin($request, $patient_id);
-    //     $this->updateRemainingQuantites($request, $patient_id);
-
-    //     $calculations = $this->calculatePrescriptions($patient_id);
-    //     $min_duration = $this->findMinimumDuration($calculations);
-    //     $revised_medications = $this->calculateRevisedMedications($patient_id, $min_duration);
-    //     $total_dose = $this->calculateTotalDose($patient_id);
-
-    //     return view('prescriptions.calculated_result')
-    //                         ->with('patient', $patient)
-    //                         ->with('calculations', $calculations)
-    //                         ->with('min_duration', $min_duration)
-    //                         ->with('revised_medications', $revised_medications)
-    //                         ->with('total_dose', $total_dose);
-    // }
     //処方日数と残薬量を一括修正
     public function updateDurationAndRemainingQuantites(Request $request, $patient_id){
         $patient = $this->patient->findOrFail($patient_id);
@@ -163,56 +129,55 @@ class PrescriptionController extends Controller
             }
         }
     }
+
     // 一包化実施
     public function implementUnitDosePackaging($patient_id)
     {
         $patient = $this->patient->findOrFail($patient_id);
+        return view('prescriptions.pack.select')
+                ->with('patient', $patient);
+    }
 
-        $calculations = $this->calculatePrescriptions($patient_id);
+    public function showUnitDosePackaging(Request $request, $patient_id)
+    {
+        $patient = $this->patient->findOrFail($patient_id);
+        $selected_prescription_ids = $request->input('selected_prescriptions', []);
+        $prescriptions = $this->prescription
+                                    ->where('patient_id', $patient_id)
+                                    ->whereIn('id', $selected_prescription_ids)
+                                    ->get();
+        $calculations = $this->calculatePrescriptions($selected_prescription_ids);
         $min_duration = $this->findMinimumDuration($calculations);
-        $revised_medications = $this->calculateRevisedMedications($patient_id, $min_duration);
-        $total_dose = $this->calculateTotalDose($patient_id);
+        $revised_medications = $this->calculateRevisedMedications($selected_prescription_ids, $min_duration);
+        $total_dose = $this->calculateTotalDose($patient_id, $selected_prescription_ids);
 
-        return view('prescriptions.calculated_result')
+        $packs = [];
+        foreach ($prescriptions as $prescription) {
+            $packs[$prescription->id] = [
+                'prescription_id' => $prescription->id,
+                'calculations' => $calculations,
+                'revised_medications' => $revised_medications,
+            ];
+        }
+
+        return view('prescriptions.pack.result')
                             ->with('patient', $patient)
+                            ->with('prescriptions', $prescriptions)
                             ->with('calculations', $calculations)
                             ->with('min_duration', $min_duration)
+                            ->with('total_dose', $total_dose)
                             ->with('revised_medications', $revised_medications)
-                            ->with('total_dose', $total_dose);
+                            ->with('packs', $packs);
     }
+
+
     // 残薬調整
     public function adjust($patient_id)
     {
         $patient = $this->patient->findOrFail($patient_id);
-        return view('prescriptions.adjust')
+        return view('prescriptions.adjust.select')
                 ->with('patient', $patient);
     }
-    // 残薬調整の計算
-    // public function adjustmentOfRemainingMedication(Request $request, $patient_id)
-    // {
-    //     $patient = Patient::with('prescriptions')->findOrFail($patient_id);
-    //     $adjustments = [];
-
-    //     foreach ($patient->prescriptions as $prescription) {
-    //         $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
-    //         $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
-    //         $total_quantity = $total_daily_dose + $prescription->remaining_quantity;
-    //         $max_duration = (int)($total_quantity / $daily_dosing_frequency);
-    //         $adjust_duration = $max_duration;
-    //         if ($max_duration >= $request->needed_duration) {
-    //             $adjust_duration = $request->needed_duration - ($max_duration - $request->needed_duration);
-    //         }else {
-    //             return ['error' => '特定のエラーメッセージ'];
-    //         }
-
-    //         $adjustments[$prescription->id] = [
-    //             'prescription_id' => $prescription->id,
-    //             'adjust_duration' => $adjust_duration
-    //         ];
-    //     }
-
-    //     return $adjustments;
-    // }
 
     // 残薬調整後の結果
     public function showAdjustments(Request $request, $patient_id)
@@ -238,23 +203,6 @@ class PrescriptionController extends Controller
                 return redirect()->back()->withErrors(['error' => '調整できない薬があります']);
             }
 
-            // $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
-            // $total_quantity = $total_daily_dose + $prescription->remaining_quantity;
-            // $max_duration = (int)($total_quantity / $daily_dosing_frequency);
-            // $adjust_duration = $max_duration;
-
-            // if ($max_duration > $needed_duration * 2 ) {
-            //     $adjust_duration = 0;
-            //     $adjust_remaining_quantity = $total_quantity - $needed_duration * $daily_dosing_frequency;
-            // }else {
-            //     if ($max_duration >= $needed_duration) {
-            //         $adjust_duration = $needed_duration - ($max_duration - $needed_duration);
-            //         $adjust_remaining_quantity = $total_quantity - $adjust_duration * $daily_dosing_frequency;
-            //     }else {
-            //         return redirect()->back()->withErrors(['error' => '無効な処方日数です']);
-            //     }
-            // }
-
             $adjustments[$prescription->id] = [
                 'prescription_id' => $prescription->id,
                 'adjusted_duration' => $adjusted_duration,
@@ -263,7 +211,7 @@ class PrescriptionController extends Controller
         }
 
 
-        return view('prescriptions.adjust-result')
+        return view('prescriptions.adjust.result')
                 ->with('adjustments', $adjustments)
                 ->with('patient', $patient);
     }
@@ -290,7 +238,7 @@ class PrescriptionController extends Controller
     }
 
     // update remaining_quantity( prescriptions table ) after revising
-    public function updateRevisedRemaining($request, $patient_id)
+    public function updateRevisedRemaining(Request $request, $patient_id)
     {
         $patient = $this->patient->findOrFail($patient_id);
 
@@ -308,9 +256,10 @@ class PrescriptionController extends Controller
         return redirect()->route('prescription.create', $patient->id);
     }
 
-    public function calculateTotalDose($patient_id)
+    public function calculateTotalDose($patient_id, $selected_prescription_ids)
     {
         $total_dose = Prescription::where('patient_id', $patient_id)
+                                    ->whereIn('id', $selected_prescription_ids)
                                     ->selectRaw('SUM(breakfast) as breakfast')
                                     ->selectRaw('SUM(lunch) as lunch')
                                     ->selectRaw('SUM(dinner) as dinner')
@@ -324,17 +273,17 @@ class PrescriptionController extends Controller
                 ];
     }
 
-    public function calculatePrescriptions($id)
+    public function calculatePrescriptions($selected_prescription_ids)
     {
-        $patient = Patient::with('prescriptions')->findOrFail($id); //$this->patientに変更できる？
+        $prescriptions = $this->prescription->whereIn('id', $selected_prescription_ids)->get();
         $calculations = [];
 
-        foreach ($patient->prescriptions as $prescription) {
+        foreach ($prescriptions as $prescription) {
             $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
             $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
             $duration_including_remaining = (int)(($total_daily_dose + $prescription->remaining_quantity) / $daily_dosing_frequency);
 
-            $calculations[] = [
+            $calculations[$prescription->id] = [
                 'prescription_id' => $prescription->id,
                 'duration_including_remaining' => $duration_including_remaining
             ];
@@ -349,12 +298,12 @@ class PrescriptionController extends Controller
         return $min_duration;
     }
 
-    public function calculateRevisedMedications($patient_id, $min_duration)
+    public function calculateRevisedMedications($selected_prescription_ids, $min_duration)
     {
-        $patient = Patient::with('prescriptions')->findOrFail($patient_id);
+        $prescriptions = $this->prescription->whereIn('id', $selected_prescription_ids)->get();
         $revised_medications = [];
 
-        foreach ($patient->prescriptions as $prescription) {
+        foreach ($prescriptions as $prescription) {
             $daily_dose = $prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime;
             $total_required_dose = $daily_dose * $min_duration;
             $revised_remaining_medications =  $daily_dose * $prescription->duration + $prescription->remaining_quantity - $total_required_dose;

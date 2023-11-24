@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
     private $patient;
-    private $medication;
 
     public function __construct(Patient $patient)
     {
@@ -23,31 +22,15 @@ class PatientController extends Controller
                 ->with('all_patients', $all_patients);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // return view('patients.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:1|max:15'
+        ]);
         $this->patient->name = $request->patient_name;
         $this->patient->save();
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-
     }
 
     /**

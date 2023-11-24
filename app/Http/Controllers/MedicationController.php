@@ -88,11 +88,11 @@ class MedicationController extends Controller
 
     public function search(Request $request)
     {
-        // $medications = $this->medication->where('name', 'like', '%' . $request->medication . '%')->get();
-        // if ($request->ajax()) {
-        //     return response()->json($medications);
-        // }
         $query = $request->input('search');
+
+        if (strlen($query) < 3) {
+            return response()->json([]);
+        }
         $medications = $this->medication->where('name', 'like', '%' . $query . '%')
                                         ->orWhere('form', 'like', '%' . $query . '%')
                                         ->orWhere('strength', 'like', '%' . $query . '%')

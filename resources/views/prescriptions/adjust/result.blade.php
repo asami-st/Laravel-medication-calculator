@@ -1,4 +1,4 @@
-@include('prescriptions.adjust')
+@include('prescriptions.adjust.select')
 <div class="container">
     <div class="row">
 
