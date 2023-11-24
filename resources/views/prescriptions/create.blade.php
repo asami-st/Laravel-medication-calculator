@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Prescription')
+@section('title', '処方')
 
 @section('content')
     @if (!$all_medications->isEmpty())

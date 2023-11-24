@@ -5,7 +5,7 @@
 @section('content')
     <form action="{{ route('adjust.show', $patient->id) }}" method="post">
         @csrf
-        <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
+        <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span>  <a href="{{ route('prescription.create', $patient->id) }}" class="text-dark text-decoration-none">{{ $patient->name }}</a></h3>
         <h4>残薬調整する薬を選択</h4>
         <table class=" table table-hover table-sm text-center w-75">
             <thead class="table-success">
@@ -43,7 +43,7 @@
                         <td>{{ floatval($prescription->lunch) }}</td>
                         <td>{{ floatval($prescription->dinner) }}</td>
                         <td>{{ floatval($prescription->bedtime) }}</td>
-                        <td>{{ $prescription->duration }}</td>
+                        <td>{{ $prescription->duration }} 日</td>
                         <td>{{ $prescription->remaining_quantity}}</td>
                     </tr>
                 @empty
@@ -53,13 +53,11 @@
                 @endforelse
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success">残薬調整</button>
         <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-success">戻る</a>
-        @if ($errors->any())
-            <div class="alert alert-danger mt-3 w-75">
-                    @foreach ($errors->all() as $error)
-                        <h6>{{ $error }}</h6>
-                    @endforeach
+        <button type="submit" class="btn btn-success">残薬調整</button>
+        @if (session('error'))
+            <div class="alert alert-danger w-75 mt-3">
+                {{ session('error') }}
             </div>
         @endif
     </form>

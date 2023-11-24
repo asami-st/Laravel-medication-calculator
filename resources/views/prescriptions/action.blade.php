@@ -7,7 +7,7 @@
             <div class="modal-content border-warning">
                 <div class="modal-header border-warning">
                     <h4 class="modal-title text-warning">
-                        <i class="fa-solid fa-prescription-bottle-medical"></i> Edit Prescription
+                        <i class="fa-solid fa-prescription-bottle-medical"></i> 処方修正
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -28,7 +28,7 @@
                             <label for="new-duration" class="form-label">処方日数</label>
                             <div class="input-group">
                                 <input type="number" name="new_duration" id="new-duration" class="form-control" min="0"  value="{{ $prescription->duration }}">
-                                <span class="input-group-text">days</span>
+                                <span class="input-group-text">日</span>
                             </div>
                         </div>
                         <div class="col">
@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-sm btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning" data-bs-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-warning btn-sm">修正</button>
                 </div>
             </div>
         </form>
@@ -55,15 +55,15 @@
             <div class="modal-content border-danger">
                 <div class="modal-header border-danger">
                     <h4 class="modal-title text-danger">
-                        <i class="fa-solid fa-circle-exclamation"></i> 処方薬削除
+                        <i class="fa-solid fa-circle-exclamation"></i> 処方削除
                     </h4>
                 </div>
                 <div class="modal-body">
                     <h6><span class="fw-bold">{{ $prescription->medication->name }}{{ $prescription->medication->form }}{{ $prescription->medication->strength }}</span> を削除しますか？</h6>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-danger btn-sm">削除</button>
                 </div>
             </div>
         </form>

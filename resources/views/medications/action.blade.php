@@ -24,8 +24,8 @@
 
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-sm btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning" data-bs-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-warning btn-sm">修正</button>
                 </div>
             </div>
         </form>
@@ -46,11 +46,11 @@
                 </div>
                 <div class="modal-body">
                     <h6><span class="fw-bold">{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</span> を削除しますか？</h6>
-                    <p class="fw-light">処方薬として既に登録されている場合でも削除されます。</p>
+                    <p class="fw-light small">※処方として既に登録されている場合でも削除されます。</p>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-danger btn-sm">削除</button>
                 </div>
             </div>
         </form>

@@ -86,7 +86,7 @@ class PrescriptionController extends Controller
     {
         $patient = $this->patient->findOrFail($id);
 
-        return view('prescriptions.enter')
+        return view('prescriptions.edit')
                 ->with('patient', $patient);
     }
 
@@ -142,6 +142,12 @@ class PrescriptionController extends Controller
     {
         $patient = $this->patient->findOrFail($patient_id);
         $selected_prescription_ids = $request->input('selected_prescriptions', []);
+
+        // 処方薬が選択されていないとき
+        if (empty($selected_prescription_ids)) {
+            return redirect()->back()->with('error', '処方を選択してください。');
+        }
+
         $prescriptions = $this->prescription
                                     ->where('patient_id', $patient_id)
                                     ->whereIn('id', $selected_prescription_ids)
@@ -185,6 +191,11 @@ class PrescriptionController extends Controller
         $patient = $this->patient->findOrFail($patient_id);
         $selected_prescription_ids = $request->input('selected_prescriptions', []);
 
+        // 処方が選択されていないとき
+        if (empty($selected_prescription_ids)) {
+            return redirect()->back()->with('error', '処方を選択してください。');
+        }
+
         $prescriptions = Prescription::where('patient_id', $patient_id)
                                      ->whereIn('id', $selected_prescription_ids)
                                      ->get();
@@ -200,7 +211,7 @@ class PrescriptionController extends Controller
                 $adjusted_duration = $prescription->duration - $remaining_duration;
                 $adjusted_remaining_quantity = $prescription->remaining_quantity - ($prescription->duration - $adjusted_duration) * $daily_dosing_frequency;
             }else{
-                return redirect()->back()->withErrors(['error' => '調整できない薬があります']);
+                return redirect()->back()->with(['error' => '調整できない薬があります']);
             }
 
             $adjustments[$prescription->id] = [
@@ -213,7 +224,8 @@ class PrescriptionController extends Controller
 
         return view('prescriptions.adjust.result')
                 ->with('adjustments', $adjustments)
-                ->with('patient', $patient);
+                ->with('patient', $patient)
+                ->with('prescriptions', $prescriptions);
     }
 
     public function updateSelectedRemainingMedication(Request $request, $patient_id)

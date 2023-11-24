@@ -37,11 +37,11 @@ Route::group(["middleware" => "auth"], function(){
     Route::patch('/prescription/{id}/update', [PrescriptionController::class, 'updatePrescription'])->name('prescription.update');
     Route::delete('/prescription/{id}/destroy', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
 
-    Route::get('/prescription/{id}/remaining', [PrescriptionController::class, 'editDurationAndRemainingQuantity'])->name('duration.remain.enter');
+    Route::get('/prescription/{id}/remaining', [PrescriptionController::class, 'editDurationAndRemainingQuantity'])->name('duration.remain.edit');
     Route::patch('/prescritpion/{id}/update/calculate', [PrescriptionController::class, 'updateDurationAndRemainingQuantites'])->name('duration.remain.update');
     Route::get('/prescritpion/{id}/pack', [PrescriptionController::class, 'implementUnitDosePackaging'])->name('pack.select');
     Route::post('prescription/{id}/pack/show', [PrescriptionController::class, 'showUnitDosePackaging'])->name('pack.show');
-    
+
     Route::patch('prescription/{id}/revised_remaining/update', [PrescriptionController::class, 'updateRevisedRemaining'])->name('revised.remain.update');
     Route::get('prescription/{id}/adjust', [PrescriptionController::class, 'adjust'])->name('adjust.select');
     Route::post('prescription/{id}/adjust/show', [PrescriptionController::class, 'showAdjustments'])->name('adjust.show');
