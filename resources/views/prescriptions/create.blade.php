@@ -83,7 +83,7 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('duration.remain.enter', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
+        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
         <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
         <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
 

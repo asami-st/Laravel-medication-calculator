@@ -39,7 +39,7 @@
             @endforelse
         </tbody>
     </table>
-    <form action="{{ route('revised.remain.update', $patient->id) }}" method="post">
+    <form action="{{ route('remain.update', $patient->id) }}" method="post">
         @csrf
         @method('PATCH')
         <h3 class="mt-5">一包化可能な最大日数: <span class="text-danger">{{ $min_duration }}</span> 日分</h3>

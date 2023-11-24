@@ -39,7 +39,7 @@
             @endforelse
         </tbody>
     </table>
-    <form action="{{ route('adjust.update', $patient->id) }}" method="post">
+    <form action="{{ route('remain.update', $patient->id) }}" method="post">
         @csrf
         @method('PATCH')
         <h4>残薬調整後処方</h4>

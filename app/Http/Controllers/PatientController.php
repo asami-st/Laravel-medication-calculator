@@ -14,6 +14,7 @@ class PatientController extends Controller
         $this->patient = $patient;
     }
 
+    // 患者一覧表示
     public function index()
     {
         $all_patients = $this->patient->all();
@@ -22,6 +23,7 @@ class PatientController extends Controller
                 ->with('all_patients', $all_patients);
     }
 
+    // 患者追加
     public function store(Request $request)
     {
         $request->validate([

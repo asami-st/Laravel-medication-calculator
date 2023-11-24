@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-sm btn-outline-info" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info btn-sm">Add</button>
+                    <button type="button" class="btn btn-sm btn-outline-info" data-bs-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-info btn-sm">追加</button>
                 </div>
             </div>
         </form>

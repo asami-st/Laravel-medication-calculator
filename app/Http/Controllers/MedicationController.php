@@ -13,9 +13,8 @@ class MedicationController extends Controller
     {
         $this->medication = $medication;
     }
-    /**
-     * Display a listing of the resource.
-     */
+
+    // 医薬品一覧
     public function index()
     {
         $all_medications = $this->medication->all();
@@ -23,17 +22,7 @@ class MedicationController extends Controller
                 ->with('all_medications', $all_medications);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // 医薬品追加
     public function store(Request $request)
     {
         $this->medication->name = $request->medication_name;
@@ -45,25 +34,7 @@ class MedicationController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Medication $medication)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Medication $medication)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    // 医薬品修正
     public function update(Request $request, $id)
     {
         $medication = $this->medication->findOrFail($id);
@@ -76,9 +47,7 @@ class MedicationController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // 医薬品削除
     public function destroy($id)
     {
         $this->medication->destroy($id);
@@ -86,6 +55,7 @@ class MedicationController extends Controller
         return redirect()->back();
     }
 
+    // 医薬品検索
     public function search(Request $request)
     {
         $query = $request->input('search');
