@@ -82,7 +82,7 @@
                         <td>{{ floatval($prescription->bedtime) }}</td>
                         <td>{{ $prescription->duration }} <span class="text-muted">日</span></td>
                         <td>{{ $prescription->remaining_quantity  ?? '0' }}</td>
-                        <td>
+                        <td class="">
                             <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#edit-prescription-{{ $prescription->id }}"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-prescription-{{ $prescription->id }}"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
@@ -95,7 +95,7 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
+        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括変更</a>
         <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
         <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
 

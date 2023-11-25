@@ -16,10 +16,10 @@
                         <div class="col">
                             <div class="input-group">
                                 <span class="input-group-text">用法用量</span>
-                                <input type="number" name="new_breakfast" id="new-breakfast" class="form-control" min="0" value="{{ $prescription->breakfast }}">
-                                <input type="number" name="new_lunch" id="new-lunch" class="form-control" min="0" value="{{ $prescription->lunch }}">
-                                <input type="number" name="new_dinner" id="new-dinner" class="form-control" min="0"  value="{{ $prescription->dinner }}">
-                                <input type="number" name="new_bedtime" id="new-bedtime" class="form-control" min="0"  value="{{ $prescription->bedtime }}">
+                                <input type="number" name="new_breakfast" id="new-breakfast" class="form-control" min="0" value="{{ floatval($prescription->breakfast) }}">
+                                <input type="number" name="new_lunch" id="new-lunch" class="form-control" min="0" value="{{ floatval($prescription->lunch) }}">
+                                <input type="number" name="new_dinner" id="new-dinner" class="form-control" min="0"  value="{{ floatval($prescription->dinner) }}">
+                                <input type="number" name="new_bedtime" id="new-bedtime" class="form-control" min="0"  value="{{ floatval($prescription->bedtime) }}">
                             </div>
                         </div>
                     </div>

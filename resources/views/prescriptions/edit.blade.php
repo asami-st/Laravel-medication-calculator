@@ -48,7 +48,7 @@
             </tbody>
         </table>
         <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-warning px-5">戻る</a>
-        <button type="submit" class="btn btn-warning px-5">修正</button>
+        <button type="submit" class="btn btn-warning px-5">変更</button>
         @if (session('error'))
             <div class="alert alert-danger mt-3">
                 {{ session('error') }}
