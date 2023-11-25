@@ -32,12 +32,12 @@
                         <td>{{ floatval($prescription->bedtime) }}</td>
                         <td>
                             <div class="input-group">
-                                <input type="number" name="duration[{{ $prescription->id }}]" value="{{ $prescription->duration ?? '0' }}" id="duration-{{ $prescription->id }}" class="form-control mx-auto" style="width: 10px">
+                                <input type="number" name="duration[{{ $prescription->id }}]" value="{{ $prescription->duration ?? '0' }}" id="duration-{{ $prescription->id }}" class="form-control mx-auto" style="width: 10px" min="0">
                                 <span class="input-group-text text-muted">日</span>
                             </div>
                         </td>
                         <td>
-                            <input type="number" name="remaining_quantities[{{ $prescription->id }}]" value="{{ $prescription->remaining_quantity ?? '0' }}" id="remaining-quantity-{{ $prescription->id }}" class="form-control mx-auto" style="width: 60px">
+                            <input type="number" name="remaining_quantities[{{ $prescription->id }}]" value="{{ $prescription->remaining_quantity ?? '0' }}" id="remaining-quantity-{{ $prescription->id }}" class="form-control mx-auto" style="width: 60px" min="0">
                         </td>
                     </tr>
                 @empty
