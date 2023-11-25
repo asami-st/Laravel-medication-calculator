@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
         $this->user->name       = 'Administrator';
         $this->user->email      = 'admin@gmail.com';
         $this->user->password   = Hash::make('admin111');
+        $this->user->role_id    = User::ADMIN_ROLE_ID;
         $this->user->save();
     }
 }

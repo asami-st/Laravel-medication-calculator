@@ -11,14 +11,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <input type="text" name="medication_name" class="form-control" placeholder="ロキソニン">
-                        <select class="form-select" name="medication_form">
+                        <input type="text" name="medication_name" class="form-control" placeholder="ロキソニン" required>
+                        <select class="form-select" name="medication_form" required>
                             <option value="" hidden>剤形</option>
                             <option value="錠">錠</option>
                             <option value="OD錠">OD錠</option>
                             <option value="カプセル">カプセル</option>
                           </select>
-                        <input type="text" name="medication_strength" class="form-control" placeholder="60mg">
+                        <input type="text" name="medication_strength" class="form-control" placeholder="60mg" required>
                     </div>
                 </div>
                 <div class="modal-footer border-0">

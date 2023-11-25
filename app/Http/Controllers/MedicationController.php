@@ -26,6 +26,12 @@ class MedicationController extends Controller
     // 医薬品追加
     public function store(Request $request)
     {
+        $request->validate([
+            'medication_name' => 'required|min:1|max:30',
+            'medication_form' => 'required',
+            'medication_strength' => 'required',
+        ]);
+        
         $this->medication->name = $request->medication_name;
         $this->medication->form = $request->medication_form;
         $this->medication->strength = $request->medication_strength;
