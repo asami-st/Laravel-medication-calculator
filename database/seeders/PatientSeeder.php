@@ -19,7 +19,8 @@ class PatientSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->patient->name       = 'テスト患者';
+        $this->patient->name     = 'テスト患者';
+        $this->patient->user_id  = 1;
         $this->patient->save();
     }
 }

@@ -8,7 +8,7 @@
             @csrf
             <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-sm-6 mb-3">
                     <label for="medication-select" class="form-label">医薬品名</label>
                     <input class="form-control mb-3" id="medication-search" type="text" placeholder="医薬品名検索">
                     <input type="hidden" id="medication-id" name="medication_id">
@@ -16,9 +16,9 @@
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-5">
+                <div class="col-sm-5">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-sm mb-3">
                             <label for="duration" class="form-label">処方日数</label>
                             <div class="input-group">
                                 <input type="number" name="duration" id="duration" class="form-control" min="0" placeholder="処方日数入力" value="{{ old('duration') }}">
@@ -28,7 +28,7 @@
                                 <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-sm mb-3">
                             <label for="remaining-quantity" class="form-label">残薬数</label>
                             <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="残薬数入力" value="{{ old('remaining_quantity') }}">
                         </div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-sm-6 mb-3">
                     <div class="input-group">
                         <span class="input-group-text">用法用量</span>
                         <input type="number" name="breakfast" id="breakfast" class="form-control" min="0" placeholder="朝" value="{{ old('breakfast') }}">
@@ -51,13 +51,13 @@
                         <p class="text-danger small">全ての服用時点に数値を入力してください。</p>
                     @endif
                 </div>
-                <div class="col-5">
+                <div class="col-sm-5 mb-3">
                     <button type="submit" class="btn btn-secondary w-100">追加</button>
                 </div>
             </div>
         </form>
 
-        <table class=" table table-hover table-sm text-center mt-5">
+        <table class=" table table-hover table-sm table-responsive text-center mt-5">
             <thead class="table-secondary">
                 <tr>
                     <th></th>
@@ -95,14 +95,14 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
-        <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
-        <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
+        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning mt-1">処方日数・残薬数一括修正</a>
+        <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success mt-1">残薬調整</a>
+        <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary mt-1">一包化</a>
 
     @else
-        <div class="text-center">
-            <h2>No medications yet.</h2>
-            <a href="{{ route('medication.index') }}" class="">Add</a>
+        <div class="text-center mt-5">
+            <h2>医薬品が登録されていません</h2>
+            <a href="{{ route('medication.index') }}" class="">追加する</a>
         </div>
     @endif
 

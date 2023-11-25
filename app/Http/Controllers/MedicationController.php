@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicationController extends Controller
 {
@@ -17,7 +18,7 @@ class MedicationController extends Controller
     // 医薬品一覧
     public function index()
     {
-        $all_medications = $this->medication->all();
+        $all_medications = $this->medication->where('user_id',  Auth::user()->id)->get();
         return view('medications.index')
                 ->with('all_medications', $all_medications);
     }
@@ -63,10 +64,13 @@ class MedicationController extends Controller
         if (strlen($query) < 3) {
             return response()->json([]);
         }
-        $medications = $this->medication->where('name', 'like', '%' . $query . '%')
-                                        ->orWhere('form', 'like', '%' . $query . '%')
-                                        ->orWhere('strength', 'like', '%' . $query . '%')
-                                        ->get();
+        $medications = $this->medication->where('user_id', Auth::user()->id)
+                                        ->where(function ($q) use ($query) {
+                                            $q->where('name', 'like', '%' . $query . '%')
+                                            ->orWhere('form', 'like', '%' . $query . '%')
+                                            ->orWhere('strength', 'like', '%' . $query . '%');
+        })
+        ->get();
 
         $suggestions = $medications->map(function ($medication) {
             return [

@@ -7,7 +7,7 @@
         @csrf
         <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span>  <a href="{{ route('prescription.create', $patient->id) }}" class="text-dark text-decoration-none">{{ $patient->name }}</a></h3>
         <h4>一包化する薬を選択</h4>
-        <table class=" table table-hover table-sm text-center w-75">
+        <table class=" table table-hover table-sm table-responsive text-center">
             <thead class="table-primary">
                 <tr>
                     <th>
@@ -56,7 +56,7 @@
         <a href="{{ route('prescription.create', $patient->id) }}" class="btn btn-outline-primary">戻る</a>
         <button type="submit" class="btn btn-primary">一包化</button>
         @if (session('error'))
-            <div class="alert alert-danger w-75 mt-3">
+            <div class="alert alert-danger mt-3">
                 {{ session('error') }}
             </div>
         @endif
