@@ -28,7 +28,7 @@ $(function() {
             $medicationId.val(ui.item.value);
             // サジェストのテキストを検索ボックスに設定
             $medicationSearch.val(ui.item.label);
-            // デフォルトのサジェストイベントをキャンセル
+            
             return false;
         }
     });

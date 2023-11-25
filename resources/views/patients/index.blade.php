@@ -32,7 +32,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3">No Patients yet.</td>
+                    <td colspan="3">患者が登録されていません。</td>
                 </tr>
             @endforelse
         </tbody>

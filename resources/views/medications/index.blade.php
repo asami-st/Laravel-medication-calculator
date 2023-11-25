@@ -36,7 +36,7 @@
                 @include('medications.action')
             @empty
                 <tr>
-                    <td colspan="4">No Medications yet.</td>
+                    <td colspan="4">医薬品が登録されていません。</td>
                 </tr>
             @endforelse
         </tbody>

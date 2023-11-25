@@ -48,7 +48,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">No Prescriptions yet.</td>
+                        <td colspan="8">処方がありません</td>
                     </tr>
                 @endforelse
             </tbody>

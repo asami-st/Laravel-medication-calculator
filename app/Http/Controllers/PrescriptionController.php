@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Models\Medication;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PrescriptionController extends Controller
 {
@@ -29,12 +30,31 @@ class PrescriptionController extends Controller
                 ->with('patient', $patient)
                 ->with('all_medications', $all_medications);
     }
-    // の処方追加
+    // 処方追加
     public function store(Request $request, $patient_id)
     {
-        $request->validate([
-            'medication_id' => 'required|unique:prescriptions,medication_id,NULL,id,patient_id,' . $request->patient_id,
-        ]);
+        $request->validate(
+            [
+                'medication_id' => [
+                    'required',
+                    Rule::unique('prescriptions')->where(function ($query) use ($patient_id) {
+                        return $query->where('patient_id', $patient_id);
+                    }),
+                ],
+                // 'medication_id' => 'required|unique:prescriptions,medication_id,NULL,id,patient_id,' . $request->patient_id,
+                'breakfast'     => 'required|min:0',
+                'lunch'         => 'required|min:0',
+                'dinner'        => 'required|min:0',
+                'bedtime'       => 'required|min:0',
+                'duration'      => 'required|min:0',
+                'remaining_quantity'     => 'nullable|min:0',
+            ],
+            [
+                'medication_id.required' => '医薬品名を入力してください',
+                'medication_id.unique' => '既に登録されている医薬品です',
+                'duration.required' => '処方日数を入力してください',
+            ]
+        );
 
         $patient = $this->patient->findOrFail($patient_id);
 
@@ -95,6 +115,10 @@ class PrescriptionController extends Controller
     // 処方日数と残薬数を一括修正
     public function updateDurationAndRemainingQuantites(Request $request, $patient_id){
         $patient = $this->patient->findOrFail($patient_id);
+        if ($patient->prescriptions->isEmpty()) {
+            return redirect()->back()->with('error', '処方を追加してください。');
+        }
+
 
         $this->updateDuratioin($request, $patient_id);
         $this->updateRemainingQuantites($request, $patient_id);

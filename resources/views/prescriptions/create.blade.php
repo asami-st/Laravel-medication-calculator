@@ -12,20 +12,29 @@
                     <label for="medication-select" class="form-label">医薬品名</label>
                     <input class="form-control mb-3" id="medication-search" type="text" placeholder="医薬品名検索">
                     <input type="hidden" id="medication-id" name="medication_id">
+                    @error('medication_id')
+                        <p class="text-danger small">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="col-5">
                     <div class="row">
                         <div class="col">
                             <label for="duration" class="form-label">処方日数</label>
                             <div class="input-group">
-                                <input type="number" name="duration" id="duration" class="form-control" min="0" placeholder="処方日数入力">
+                                <input type="number" name="duration" id="duration" class="form-control" min="0" placeholder="処方日数入力" value="{{ old('duration') }}">
                                 <span class="input-group-text">日</span>
                             </div>
+                            @error('duration')
+                                <p class="text-danger small">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="col">
                             <label for="remaining-quantity" class="form-label">残薬数</label>
-                            <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="残薬数入力">
+                            <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="残薬数入力" value="{{ old('remaining_quantity') }}">
                         </div>
+                        @error('remaining_quantity')
+                            <p class="text-danger small">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -33,11 +42,14 @@
                 <div class="col-6">
                     <div class="input-group">
                         <span class="input-group-text">用法用量</span>
-                        <input type="number" name="breakfast" id="breakfast" class="form-control" min="0" placeholder="朝">
-                        <input type="number" name="lunch" id="lunch" class="form-control" min="0" placeholder="昼">
-                        <input type="number" name="dinner" id="dinner" class="form-control" min="0" placeholder="夕">
-                        <input type="number" name="bedtime" id="bedtime" class="form-control" min="0" placeholder="寝る前">
+                        <input type="number" name="breakfast" id="breakfast" class="form-control" min="0" placeholder="朝" value="{{ old('breakfast') }}">
+                        <input type="number" name="lunch" id="lunch" class="form-control" min="0" placeholder="昼" value="{{ old('lunch') }}">
+                        <input type="number" name="dinner" id="dinner" class="form-control" min="0" placeholder="夕" value="{{ old('dinner') }}">
+                        <input type="number" name="bedtime" id="bedtime" class="form-control" min="0" placeholder="寝る前" value="{{ old('bedtime') }}">
                     </div>
+                    @if($errors->hasAny(['breakfast', 'lunch', 'dinner', 'bedtime']))
+                        <p class="text-danger small">全ての服用時点に数値を入力してください。</p>
+                    @endif
                 </div>
                 <div class="col-5">
                     <button type="submit" class="btn btn-secondary w-100">追加</button>
@@ -78,7 +90,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8">No Prescriptions yet.</td>
+                        <td colspan="8">処方がありません</td>
                     </tr>
                 @endforelse
             </tbody>
