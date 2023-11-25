@@ -13,7 +13,7 @@
         </div>
         @include('medications.create')
     </div>
-    <table class=" table table-hover text-center w-75">
+    <table class=" table table-hover table-responsive text-center">
         <thead class="table-info">
             <tr>
                 <th>{{-- id --}}</th>

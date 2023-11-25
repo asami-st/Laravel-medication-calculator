@@ -7,7 +7,7 @@
         @csrf
         <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span>  <a href="{{ route('prescription.create', $patient->id) }}" class="text-dark text-decoration-none">{{ $patient->name }}</a></h3>
         <h4>一包化する薬を選択</h4>
-        <table class=" table table-hover table-sm text-center w-75">
+        <table class=" table table-hover table-sm text-centertable-responsive">
             <thead class="table-primary">
                 <tr>
                     <th>

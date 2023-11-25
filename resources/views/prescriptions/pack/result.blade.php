@@ -43,7 +43,7 @@
         @csrf
         @method('PATCH')
         <h3 class="mt-5">一包化可能な最大日数: <span class="text-danger">{{ $min_duration }}</span> 日分</h3>
-        <table class=" table table-hover table-sm text-center w-75">
+        <table class=" table table-hover table-sm text-center table-responsive">
             <thead class="table-danger">
                 <tr>
                     <th></th>
