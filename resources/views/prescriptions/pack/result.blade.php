@@ -6,7 +6,7 @@
 <div class="container">
     <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span>  <a href="{{ route('prescription.create', $patient->id) }}" class="text-dark text-decoration-none">{{ $patient->name }}</a></h3>
     <h4>元の処方</h4>
-    <table class="table table-hover table-sm text-center w-75 mb-5">
+    <table class="table table-hover table-sm text-center table-responsive mb-5">
         <thead class="table-primary">
             <tr>
                 <th>
