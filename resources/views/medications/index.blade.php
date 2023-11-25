@@ -8,7 +8,7 @@
         <div class="col-sm-auto">
             <h1>医薬品一覧</h1>
         </div>
-        <div class="col-sm">
+        <div class="col-sm-auto">
             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add-medication"><i class="fa-solid fa-pills"></i> 追加</button>
         </div>
         @include('medications.create')

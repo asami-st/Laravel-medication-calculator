@@ -8,7 +8,7 @@
             @csrf
             <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
             <div class="row mb-3">
-                <div class="col-sm-6 mb-3">
+                <div class="col-sm-6 mb-0">
                     <label for="medication-select" class="form-label">医薬品名</label>
                     <input class="form-control mb-3" id="medication-search" type="text" placeholder="医薬品名検索">
                     <input type="hidden" id="medication-id" name="medication_id">
@@ -28,7 +28,7 @@
                                 <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col-sm mb-3">
+                        <div class="col-sm mb-0">
                             <label for="remaining-quantity" class="form-label">残薬数</label>
                             <input type="number" name="remaining_quantity" id="remaining-quantity" class="form-control" min="0" placeholder="残薬数入力" value="{{ old('remaining_quantity') }}">
                         </div>

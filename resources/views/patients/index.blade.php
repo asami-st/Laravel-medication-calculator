@@ -7,7 +7,7 @@
         <div class="col-sm-auto">
             <h1>患者一覧</h1>
         </div>
-        <div class="col-sm">
+        <div class="col-sm-auto">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient"><i class="fa-solid fa-user-plus"></i> 追加</button>
         </div>
     </div>
