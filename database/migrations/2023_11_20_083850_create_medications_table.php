@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('form')->nullable();
             $table->text('strength');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
