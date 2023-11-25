@@ -42,7 +42,7 @@
     <form action="{{ route('remain.update', $patient->id) }}" method="post">
         @csrf
         @method('PATCH')
-        <h4>残薬調整後処方</h4>
+        <h4>残薬調整後</h4>
         <table class=" table table-hover table-sm text-center">
             <thead class="table-danger">
                 <tr>
