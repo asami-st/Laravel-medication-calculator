@@ -57,7 +57,7 @@ class MedicationController extends Controller
         return redirect()->back();
     }
 
-    // 医薬品検索
+    // 医薬品検索（３文字検索）
     public function search(Request $request)
     {
         $query = $request->input('search');
