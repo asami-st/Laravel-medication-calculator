@@ -27,7 +27,7 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:1|max:15'
+            'patient_name' => 'required|min:1|max:15'
         ]);
         $this->patient->name = $request->patient_name;
         $this->patient->save();
@@ -35,27 +35,4 @@ class PatientController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Patient $patient)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Patient $patient)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Patient $patient)
-    {
-        //
-    }
 }
