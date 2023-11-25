@@ -6,7 +6,7 @@
 <div class="container">
     <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span>  <a href="{{ route('prescription.create', $patient->id) }}" class="text-dark text-decoration-none">{{ $patient->name }}</a></h3>
     <h4>元の処方</h4>
-    <table class="table table-hover table-sm table-responsive text-center mb-5">
+    <table class="table table-hover table-sm text-center w-75 mb-5">
         <thead class="table-primary">
             <tr>
                 <th>
@@ -43,7 +43,7 @@
         @csrf
         @method('PATCH')
         <h3 class="mt-5">一包化可能な最大日数: <span class="text-danger">{{ $min_duration }}</span> 日分</h3>
-        <table class=" table table-hover table-sm table-responsive text-center">
+        <table class=" table table-hover table-sm text-center w-75">
             <thead class="table-danger">
                 <tr>
                     <th></th>

@@ -29,6 +29,7 @@ class MedicationController extends Controller
         $this->medication->name = $request->medication_name;
         $this->medication->form = $request->medication_form;
         $this->medication->strength = $request->medication_strength;
+        $this->medication->user_id = Auth::user()->id;
 
         $this->medication->save();
 

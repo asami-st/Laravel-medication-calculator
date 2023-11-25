@@ -57,7 +57,7 @@
             </div>
         </form>
 
-        <table class=" table table-hover table-sm table-responsive text-center mt-5">
+        <table class=" table table-hover table-sm text-center mt-5">
             <thead class="table-secondary">
                 <tr>
                     <th></th>
@@ -95,9 +95,9 @@
                 @endforelse
             </tbody>
         </table>
-        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning mt-1">処方日数・残薬数一括修正</a>
-        <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success mt-1">残薬調整</a>
-        <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary mt-1">一包化</a>
+        <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括修正</a>
+        <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
+        <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
 
     @else
         <div class="text-center mt-5">

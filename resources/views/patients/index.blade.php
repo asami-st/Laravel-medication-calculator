@@ -14,7 +14,8 @@
     {{-- Modal --}}
     @include('patients.create')
 
-    <table class=" table table-hover table-responsive text-center">
+    <table class=" table table-hover table-responsive-sm text-center">
+
         <thead class="table-primary">
             <tr>
                 <th></th>
