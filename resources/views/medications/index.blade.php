@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', '医薬品一覧')

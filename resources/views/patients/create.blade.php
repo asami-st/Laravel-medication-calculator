@@ -10,6 +10,9 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" name="patient_name" class="form-control" placeholder="患者氏名:15字以内" required>
+                    @error('patient_name')
+                        <p class="text-danger small">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">戻る</button>

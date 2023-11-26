@@ -27,14 +27,19 @@ class PatientController extends Controller
     // 患者追加
     public function store(Request $request)
     {
-        $request->validate([
-            'patient_name' => 'required|min:1|max:15'
-        ]);
+        $request->validate(
+            [
+                'patient_name' => 'required|max:15'
+            ],
+            [
+                'patient_name.required' => '患者名を入力してください',
+                'patient_name.max'      =>  '患者名は１５字以内で入力してください'
+            ]
+        );
         $this->patient->name = $request->patient_name;
         $this->patient->user_id = Auth::user()->id;
         $this->patient->save();
 
         return redirect()->back();
     }
-
 }

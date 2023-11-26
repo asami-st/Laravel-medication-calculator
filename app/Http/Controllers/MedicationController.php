@@ -31,7 +31,6 @@ class MedicationController extends Controller
             'medication_form' => 'required',
             'medication_strength' => 'required',
         ]);
-        
         $this->medication->name = $request->medication_name;
         $this->medication->form = $request->medication_form;
         $this->medication->strength = $request->medication_strength;
@@ -46,7 +45,6 @@ class MedicationController extends Controller
     public function update(Request $request, $id)
     {
         $medication = $this->medication->findOrFail($id);
-
         $medication->name = $request->medication_name;
         $medication->form = $request->medication_form;
         $medication->strength = $request->medication_strength;
@@ -67,7 +65,6 @@ class MedicationController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('search');
-
         if (strlen($query) < 3) {
             return response()->json([]);
         }
@@ -78,7 +75,6 @@ class MedicationController extends Controller
                                             ->orWhere('strength', 'like', '%' . $query . '%');
         })
         ->get();
-
         $suggestions = $medications->map(function ($medication) {
             return [
                 'label' => $medication->name . ' ' . $medication->form . ' ' . $medication->strength,

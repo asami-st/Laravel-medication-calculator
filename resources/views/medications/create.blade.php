@@ -19,6 +19,9 @@
                             <option value="カプセル">カプセル</option>
                           </select>
                         <input type="text" name="medication_strength" class="form-control" placeholder="60mg" required>
+                        @if($errors->hasAny(['medication_name', 'medication_form', 'medication_strength']))
+                            <p class="text-danger small">全ての項目を入力してください。</p>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer border-0">

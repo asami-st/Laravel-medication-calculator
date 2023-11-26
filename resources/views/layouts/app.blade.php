@@ -100,7 +100,5 @@
             </div>
         </main>
     </div>
-    {{-- <script src="{{ asset('/build/assets/search-6c238805.js') }}"></script>
-    @vite('resources/js/search.js') --}}
 </body>
 </html>
