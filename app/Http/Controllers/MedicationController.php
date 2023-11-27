@@ -77,7 +77,7 @@ class MedicationController extends Controller
         ->get();
         $suggestions = $medications->map(function ($medication) {
             return [
-                'label' => $medication->name . ' ' . $medication->form . ' ' . $medication->strength,
+                'label' => $medication->name . $medication->form . $medication->strength,
                 'value' => $medication->id
             ];
         });
