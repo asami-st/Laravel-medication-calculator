@@ -15,7 +15,7 @@
     <table class=" table table-hover table-responsive text-center">
         <thead class="table-info">
             <tr>
-                <th>{{-- id --}}</th>
+                <th>{{-- No. --}}</th>
                 <th>医薬品名</th>
                 <th>更新日</th>
                 <th>{{-- buttons --}}</th>
@@ -24,7 +24,7 @@
         <tbody>
             @forelse ($all_medications as $medication)
                 <tr>
-                    <td>{{ $medication->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $medication->name }}{{ $medication->form }}{{ $medication->strength }}</td>
                     <td>{{ $medication->updated_at->format('Y-m-d H:i') }}</td>
                     <td>

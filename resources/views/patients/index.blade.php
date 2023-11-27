@@ -18,7 +18,7 @@
 
         <thead class="table-primary">
             <tr>
-                <th></th>
+                <th>{{-- No. --}}</th>
                 <th>患者名</th>
                 <th>更新日</th>
             </tr>
@@ -26,7 +26,7 @@
         <tbody>
             @forelse ($all_patients as $patient)
                 <tr>
-                    <td>{{ $patient->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td><a href="{{ route('prescription.create', $patient->id) }}" class="text-dark">{{ $patient->name }}</a></td>
                     <td>{{ $patient->updated_at->format('Y-m-d H:i') }}</td>
                 </tr>
