@@ -7,6 +7,7 @@ use App\Models\Medication;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PrescriptionController extends Controller
 {
@@ -25,7 +26,7 @@ class PrescriptionController extends Controller
     public function create($patient_id)
     {
         $patient = $this->patient->findOrFail($patient_id);
-        $all_medications = $this->medication->all();
+        $all_medications = $this->medication->where('user_id', Auth::user()->id);
 
         return view('prescriptions.create')
                 ->with('patient', $patient)

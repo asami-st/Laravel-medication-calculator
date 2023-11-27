@@ -3,7 +3,7 @@
 @section('title', '処方')
 
 @section('content')
-    @if (!$all_medications->isEmpty())
+    @if ($all_medications->count() > 0)
         <form action="{{ route('prescription.store', $patient->id) }}" method="post">
             @csrf
             <h3 class="mb-4"><span class="small"><i class="fa-solid fa-prescription text-white bg-secondary p-2"></i></span> {{ $patient->name }}</h3>
@@ -98,7 +98,6 @@
         <a href="{{ route('duration.remain.edit', $patient->id) }}" class="btn btn-warning">処方日数・残薬数一括変更</a>
         <a href="{{ route('adjust.select', $patient->id) }}" class="btn btn-success">残薬調整</a>
         <a href="{{ route('pack.select', $patient->id) }}" class="btn btn-primary">一包化</a>
-
     @else
         <div class="text-center mt-5">
             <h2>医薬品が登録されていません</h2>
