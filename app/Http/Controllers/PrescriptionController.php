@@ -294,10 +294,9 @@ class PrescriptionController extends Controller
         $prescriptions = $this->prescription->whereIn('id', $selected_prescription_ids)->get();
         $duration_estimates = [];
         foreach ($prescriptions as $prescription) {
-            $daily_dosing_frequency = $this->getDailyDosingFrequency($prescription);
-            $total_daily_dose = ($prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime) * $prescription->duration;
-            $duration_including_remaining = (int)(($total_daily_dose + $prescription->remaining_quantity) / $daily_dosing_frequency);
-
+            $daily_dose = $prescription->breakfast + $prescription->lunch + $prescription->dinner + $prescription->bedtime; //１日の合計服用錠数
+            $total_daily_dose = $daily_dose * $prescription->duration; //処方日数分の合計服用錠数
+            $duration_including_remaining = (int)(($total_daily_dose + $prescription->remaining_quantity) / $daily_dose); //残薬を含めた一包化可能日数
             $duration_estimates[$prescription->id] = [
                 'prescription_id' => $prescription->id,
                 'duration_including_remaining' => $duration_including_remaining
