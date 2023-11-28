@@ -24,6 +24,10 @@ $(function() {
             });
         },
         minLength: 3,
+        focus: function(event, ui){
+            event.preventDefault();
+            $(this).val(ui.item.label);
+        },
         select: function(event, ui) {
             $medicationId.val(ui.item.value);
             $medicationSearch.val(ui.item.label);
