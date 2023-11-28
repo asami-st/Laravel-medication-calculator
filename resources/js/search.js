@@ -23,7 +23,7 @@ $(function() {
             });
         },
         minLength: 3,
-        select: function(ui) {
+        select: function(event, ui) {
             $medicationId.val(ui.item.value);
             $medicationSearch.val(ui.item.label);
 
