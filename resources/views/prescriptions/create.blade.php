@@ -105,5 +105,5 @@
         </div>
     @endif
 
-    <script src="{{ asset('build/assets/search-fed54d2e.js') }}"></script>
+    <script src="{{ asset('build/assets/search-8a1123ee.js') }}"></script>
 @endsection
