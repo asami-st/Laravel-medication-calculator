@@ -104,5 +104,5 @@
             <a href="{{ route('medication.index') }}" class="">追加する</a>
         </div>
     @endif
-    <script src="{{ asset('build/assets/search-8a1123ee.js') }}"></script>
+    <script src="{{ asset('build/assets/search-c4fe4d11.js') }}"></script>
 @endsection

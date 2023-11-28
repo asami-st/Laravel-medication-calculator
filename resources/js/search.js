@@ -1,8 +1,9 @@
 $(function() {
-    var selectedMedication = -1;
+    var $medicationSearch = $('#medication-search');
     var $medicationId = $('#medication-id');
     var $searchResults = $('#search-results');
-    var $medicationSearch = $('#medication-search');
+    var items = $('#search-results .list-group-item');
+    var selectedMedication = -1;
 
     $medicationSearch.autocomplete({
         source: function(request, response) {
@@ -31,33 +32,36 @@ $(function() {
         }
     });
 
-    $('#medication-search').on('keydown', function(e) {
-        var items = $('#search-results .list-group-item');
+    function updateActiveItem(){
+        items.removeClass('active');
+        if (selectedMedication >= 0) {
+            items.eq(selectedMedication).addClass('active');
+        }
+    }
+
+    $medicationSearch.on('keydown', function(e) {
         if (e.key === 40) { // ↓
             e.preventDefault();
             selectedMedication = (selectedMedication + 1) % items.length;
-            items.removeClass('active');
-            items.eq(selectedMedication).addClass('active');
+            updateActiveItem();
         } else if (e.key === 38) { // ↑
             e.preventDefault();
-            if (selectedMedication <= 0) {
-                selectedMedication = -1;
-                items.removeClass('active');// back to input field
-            } else {
+            if (selectedMedication > 0) {
                 selectedMedication--;
-                items.removeClass('active');
-                items.eq(selectedMedication).addClass('active');
+            } else {
+                selectedMedication = -1;
             }
+            updateActiveItem();
         } else if (e.key === 13 && selectedMedication !== -1) { // Enter, show suggest
             e.preventDefault();
-            $('#medication-search').val(items.eq(selectedMedication).text());
+            $medicationSearch.val(items.eq(selectedMedication).text());
             $searchResults.hide();
             selectedMedication = -1; // reset
         }
     });
 
     $(document).on('click', function(e) {
-        if (!$(e.target).closest('#medication-search').length) {
+        if (!$(e.target).closest($medicationSearch).length) {
             $searchResults.hide();
         }
     });
